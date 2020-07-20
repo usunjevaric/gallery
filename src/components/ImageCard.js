@@ -3,6 +3,7 @@ import React from "react";
 const ImageCard = ({
   image: { id, webformatURL, tags, views, downloads, favorites, likes, comments, user },
 }) => {
+  /*
   const tagList = tags.split(",");
   return (
     <div className='max-w-sm rounded overflow-hidden shadow-lg'>
@@ -34,6 +35,12 @@ const ImageCard = ({
           </span>
         ))}
       </div>
+    </div>
+  );
+  */
+  return (
+    <div className='max-w-sm rounded overflow-hidden shadow-lg'>
+      <img src={webformatURL} alt='' className='w-full' />
     </div>
   );
 };

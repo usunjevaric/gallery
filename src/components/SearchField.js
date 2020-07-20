@@ -11,8 +11,8 @@ const SearchField = ({ setSearchTerm }) => {
     setSearchTerm(text);
   };
   return (
-    <div className='max-w-lg rounded overflow-hidden mt-10 mb-20 mr-0'>
-      <form onSubmit={handleSubmit} className='w-full max-w-lg'>
+    <div className='max-w-xl rounded overflow-hidden mt-10 mb-20 mx-auto'>
+      <form onSubmit={handleSubmit} className='w-full max-w-xl'>
         <div className='flex items-center border-b-2 border-teal-500 py-2'>
           <input
             onChange={handleChange}

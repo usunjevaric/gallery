@@ -1,12 +1,7 @@
-import axios from "axios";
+import API from "./API";
 
-const url = `https://pixabay.com/api/?key=${process.env.REACT_APP_PIXABAY_API_KEY}&image_type=photo&pretty=true`;
-
-export const fetchImages = (term = "") => {
-  return axios
-    .get(`${url}&q=${term}`)
-    .then((res) => res)
-    .catch((error) => {
-      return error;
-    });
+export const fetchImages = (pageNumber = 1, term = "") => {
+  return API.get("/", { params: { page: pageNumber, q: term } })
+    .then((res) => res.data)
+    .catch((err) => err);
 };

@@ -1,45 +1,92 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import useDidUpdateEffect from "./hooks/useDidUpdateEffect";
+
+import InfiniteScroll from "react-infinite-scroll-component";
+
 import { fetchImages } from "./requests.js";
 
-import ImageCard from "./components/ImageCard";
 import SearchField from "./components/SearchField";
+import ImageList from "./components/ImageList";
+
+// let pageNum = 1;
 function App() {
   const [images, setImages] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [totalPages, setTotalPages] = useState(0);
+  const [pageNum, setPageNum] = useState(1);
   const [term, setTerm] = useState("");
 
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    fetchImages(term).then((res) => {
-      setImages(res.data.hits);
-      setIsLoading(false);
-    });
+    loadNextImages();
+  }, [pageNum, term]);
+
+  //custom hook for simulate componentDidUpdate, no need to fire on render, just if term change
+  useDidUpdateEffect(() => {
+    console.log("update term");
+    setIsLoading(true);
+    setImages([]);
+    setPageNum(1);
   }, [term]);
+
+  const loadNextImages = () => {
+    setIsLoading(true);
+    fetchImages(pageNum, term)
+      .then((res) => {
+        setImages((imgs) => [...imgs, ...res.hits]);
+        setTotalPages(res.totalHits / res.hits.length);
+      })
+      .then(() => setIsLoading(false))
+      .catch((err) => {
+        console.log("err");
+      });
+  };
 
   const termHandler = (term) => {
     setTerm(term);
   };
 
-  const loadingSpinner = "Loading...";
-  let loadedImages;
+  const loadMoreHandler = () => {
+    setPageNum((s) => s + 1);
+  };
 
-  if (!isLoading && images.length === 0) {
-    loadedImages = <h1 className='text-5xl text-center mx-auto mt-32'>No Images Found</h1>;
-  } else {
-    loadedImages = (
-      <div className='grid grid-cols-3 gap-4'>
-        {images.map((image) => (
-          <ImageCard key={image.id} image={image} />
-        ))}
-      </div>
-    );
-  }
+  const loadingSpinner = <h1 className='text-xs'>Loading...</h1>;
+
   return (
     <div className='container mx-auto'>
       {" "}
       <SearchField setSearchTerm={(term) => termHandler(term)} />
-      {isLoading ? loadingSpinner : loadedImages}
+      <InfiniteScroll
+        dataLength={images.length}
+        scrollThreshold={0.9}
+        next={() => setPageNum((s) => s + 1)}
+        loader={loadingSpinner}
+        hasMore={pageNum < totalPages ? true : false}>
+        <ImageList images={images} />
+      </InfiniteScroll>
+      {!isLoading && (
+        <button
+          onClick={() => {
+            setIsLoading(false);
+            loadMoreHandler();
+          }}>
+          Load More
+        </button>
+      )}
     </div>
   );
 }
 
 export default App;
+
+// if (!isLoading && images.length === 0) {
+//   loadedImages = <h1 className='text-5xl text-center mx-auto mt-32'>No Images Found</h1>;
+// } else {
+//   loadedImages = (
+//     <div className='grid grid-cols-3 gap-4'>
+//       {images.map((image) => (
+//         <ImageCard key={image.id} image={image} />
+//       ))}
+//     </div>
+//   );
+// }

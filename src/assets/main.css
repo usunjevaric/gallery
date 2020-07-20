@@ -14342,6 +14342,8 @@ video {
   transition-delay: 1000ms;
 }
 
+@import "./style.css";
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
