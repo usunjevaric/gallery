@@ -4,7 +4,7 @@ import ImageCard from "./ImageCard";
 
 const ImageList = ({ images }) => {
   useEffect(() => {}, [images]);
-  const noImages = <h1 className='text-5xl text-center mx-auto mt-32'>No Images Found</h1>;
+  // const noImages = <h1 className='text-5xl text-center mx-auto mt-32'>No Images Found</h1>;
 
   const breakpointsColumsObj = {
     default: 4,

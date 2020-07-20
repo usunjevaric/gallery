@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import useDidUpdateEffect from "./hooks/useDidUpdateEffect";
 
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -19,6 +19,7 @@ function App() {
 
   useEffect(() => {
     loadNextImages();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageNum, term]);
 
   //custom hook for simulate componentDidUpdate, no need to fire on render, just if term change
