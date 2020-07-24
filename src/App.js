@@ -3,8 +3,9 @@ import useDidUpdateEffect from "./hooks/useDidUpdateEffect";
 
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import { fetchImages } from "./requests.js";
+import { fetchImages, fetchImageById } from "./requests.js";
 
+import HeroImage from "./components/HeroImage";
 import SearchField from "./components/SearchField";
 import ImageList from "./components/ImageList";
 
@@ -17,6 +18,12 @@ function App() {
 
   const [isLoading, setIsLoading] = useState(true);
 
+  const [heroImage, setHeroImage] = useState({});
+  useEffect(() => {
+    fetchImageById("5413412")
+      .then((res) => setHeroImage(res.hits[0]))
+      .catch((err) => console.log(err));
+  }, []);
   useEffect(() => {
     loadNextImages();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -54,9 +61,14 @@ function App() {
   const loadingSpinner = <h1 className='text-xs'>Loading...</h1>;
 
   return (
-    <div className='container mx-auto'>
-      {" "}
-      <SearchField setSearchTerm={(term) => termHandler(term)} />
+    <div className='mx-auto'>
+      {heroImage && (
+        <HeroImage heroImage={heroImage} setSearchTerm={(term) => termHandler(term)}>
+          {" "}
+          {/*<SearchField setSearchTerm={(term) => termHandler(term)} />*/}
+        </HeroImage>
+      )}
+
       <InfiniteScroll
         dataLength={images.length}
         scrollThreshold={0.9}

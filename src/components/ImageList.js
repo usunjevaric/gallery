@@ -1,24 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Masonry from "react-masonry-css";
 import ImageCard from "./ImageCard";
-
+import Modal from "./Modal";
 const ImageList = ({ images }) => {
   useEffect(() => {}, [images]);
   // const noImages = <h1 className='text-5xl text-center mx-auto mt-32'>No Images Found</h1>;
 
   const breakpointsColumsObj = {
-    default: 4,
-    1200: 3,
-    922: 2,
+    default: 3,
+    1024: 2,
     768: 2,
-    576: 1,
+    640: 1,
   };
   return (
-    <div className='mx-auto px-10'>
+    <div className='mx-auto px-3 w-full'>
       <Masonry
         breakpointCols={breakpointsColumsObj}
-        className='masonry-grid'
-        columnClassName='masonry-grid_column'>
+        className='masonry-grid mx-auto w-full '
+        columnClassName='masonry-grid_column ml-0 sm:ml-3'>
         {images.map((image, idx) => (
           <ImageCard key={image.id} image={image} />
         ))}

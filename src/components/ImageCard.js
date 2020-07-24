@@ -1,46 +1,76 @@
-import React from "react";
-
+import React, { useState } from "react";
+import Modal from "./Modal";
+import { FiDownload } from "react-icons/fi";
 const ImageCard = ({
-  image: { id, webformatURL, tags, views, downloads, favorites, likes, comments, user },
+  image: {
+    id,
+    webformatURL,
+    tags,
+    views,
+    downloads,
+    favorites,
+    likes,
+    comments,
+    user,
+    largeImageURL,
+    userImageURL,
+  },
 }) => {
-  /*
-  const tagList = tags.split(",");
-  return (
-    <div className='max-w-sm rounded overflow-hidden shadow-lg'>
-      <img src={webformatURL} alt='' className='w-full' />
-      <div className='px-6 py-4'>
-        <div className='font-bold text-purple-500 text-xl mb-2'>Photo by {user}</div>
+  const [showModal, setShowModal] = React.useState(false);
+  const modalCloseHandler = () => {
+    setShowModal(false);
+  };
+  const modalOpenHandler = () => {
+    // setShowModal(true);
+  };
+  const downloadImageHandler = (e) => {
+    e.preventDefault();
+    let anchor;
+    if (e.target.parentElement.nodeName === "svg") {
+      anchor = e.target.parentElement.parentElement;
+    } else {
+      anchor = e.target.parentElement;
+    }
 
-        <ul>
-          <li>
-            <strong>Views:</strong>
-            {views}
-          </li>
-          <li>
-            <strong>Downloads:</strong>
-            {downloads}
-          </li>
-          <li>
-            <strong>Likes:</strong>
-            {likes}
-          </li>
-        </ul>
-      </div>
-      <div className='px-6 py-4'>
-        {tagList.map((tag) => (
-          <span
-            key={`${tag}-${id}`}
-            className='inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2'>
-            #{tag}
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-  */
+    fetch(anchor.href, {
+      method: "GET",
+      headers: {},
+    })
+      .then((res) => {
+        res.arrayBuffer().then((buf) => {
+          const url = window.URL.createObjectURL(new Blob([buf]));
+          console.log(url);
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", `usunjevaric_imageGallery_${id}.jpg`);
+          document.body.appendChild(link);
+          link.click();
+        });
+      })
+      .catch((err) => console.log(err));
+    console.log(anchor.href);
+  };
   return (
-    <div className='max-w-sm rounded overflow-hidden shadow-lg'>
-      <img src={webformatURL} alt='' className='w-full' />
+    <div className='max-w-full rounded overflow-hidden shadow-lg relative image-container'>
+      {showModal && <Modal closeModal={modalCloseHandler} imageUrl={webformatURL} />}
+
+      <img onClick={modalOpenHandler} src={webformatURL} alt='' className='w-full cursor-pointer' />
+
+      <div className='image-data absolute flex items-center content-center justify-between px-4'>
+        <div>
+          <img src={userImageURL} alt='' className='h-8 w-8 rounded-full mr-3 inline-block' />
+          <span className='font-sans text-gray-200'>{user}</span>
+        </div>
+        <div>
+          <a
+            className='text-gray-200 flex-row'
+            href={largeImageURL}
+            download
+            onClick={(e) => downloadImageHandler(e)}>
+            <FiDownload size={20} className='text-gray-200' />
+          </a>
+        </div>
+      </div>
     </div>
   );
 };

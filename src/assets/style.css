@@ -1,14 +1,50 @@
 .masonry-grid {
   display: flex;
   width: auto;
+  margin-left: -30px;
 }
 .masonry-grid_column {
-  margin-left: 10px;
-  padding-left: 2px;
+  /* margin-left: 1.2rem; */
   background-clip: padding-box;
 }
 
 .masonry-grid_column > div {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   background: grey;
+}
+
+.image-data {
+  display: none;
+}
+
+.image-container:hover .image-data {
+  /* color: #fff; */
+  width: 100%;
+  height: 70px;
+  line-height: 70px;
+  /* padding-left: 20px; */
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: inline-flex;
+}
+
+@media only screen and (max-width: 1024px) {
+  .image-data {
+    color: #fff;
+    width: 100%;
+    height: 70px;
+    line-height: 70px;
+    /* padding-left: 20px; */
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: inline-block;
+  }
+}
+
+.hero {
+  height: 60vh;
 }

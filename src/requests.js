@@ -5,3 +5,9 @@ export const fetchImages = (pageNumber = 1, term = "") => {
     .then((res) => res.data)
     .catch((err) => err);
 };
+
+export const fetchImageById = (id) => {
+  return API.get("/", { params: { id: id } })
+    .then((res) => res.data)
+    .catch((err) => err);
+};

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { FiSearch } from "react-icons/fi";
 const SearchField = ({ setSearchTerm }) => {
   const [text, setText] = useState("");
 
@@ -11,8 +11,38 @@ const SearchField = ({ setSearchTerm }) => {
     setSearchTerm(text);
   };
   return (
-    <div className='max-w-xl rounded overflow-hidden mt-10 mb-20 mx-auto'>
-      <form onSubmit={handleSubmit} className='w-full max-w-xl'>
+    <div className='w-full px-12 md:px-0 rounded overflow-hidden mt-10 mb-20 mx-auto absolute bottom-0'>
+      <form onSubmit={handleSubmit} className='w-full max-w-xl mx-auto'>
+        <p className='mb-5 text-gray-100 font-bold text-4xl tracking-wide'>
+          The best photos shared by talented creators.
+        </p>
+        <div className='flex items-center bg-gray-200  rounded-md px-3 py-2'>
+          <input
+            onChange={handleChange}
+            value={text}
+            type='text'
+            placeholder='Search for photos'
+            className='appearance-none bg-gray-200 border-none w-full text-gray-900 mr-3 py-1 px-2 leading-tight focus:outline-none placeholder-gray-600'
+          />
+          <button
+            type='submit'
+            className='flex-shrink-0 bg-transparent rounded hover:bg-gray-400 border-none hover:border-none text-xl border-4 text-gray-900 py-1 px-2'>
+            <FiSearch />
+          </button>
+        </div>
+        <p className='text-gray-100 text-md font-sans pl-3 mt-2'>
+          Sugested: city, work, girl, office, travel
+        </p>
+      </form>
+    </div>
+  );
+};
+
+export default SearchField;
+
+{
+  /*    <div className='w-full rounded overflow-hidden mt-10 mb-20 mx-auto absolute bottom-0'>
+      <form onSubmit={handleSubmit} className='w-full max-w-xl mx-auto'>
         <div className='flex items-center border-b-2 border-teal-500 py-2'>
           <input
             onChange={handleChange}
@@ -28,8 +58,5 @@ const SearchField = ({ setSearchTerm }) => {
           </button>
         </div>
       </form>
-    </div>
-  );
-};
-
-export default SearchField;
+    </div>*/
+}
