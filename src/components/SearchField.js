@@ -11,7 +11,7 @@ const SearchField = ({ setSearchTerm }) => {
     setSearchTerm(text);
   };
   return (
-    <div className='w-full px-12 md:px-0 rounded overflow-hidden mt-10 mb-20 mx-auto absolute bottom-0'>
+    <div className='w-full px-12 md:px-0 rounded overflow-hidden mt-20 mb-10 sm:mb-20 mx-auto absolute bottom-0'>
       <form onSubmit={handleSubmit} className='w-full max-w-xl mx-auto'>
         <p className='mb-5 text-gray-100 font-bold text-4xl tracking-wide'>
           The best photos shared by talented creators.

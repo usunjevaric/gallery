@@ -30,6 +30,10 @@
   display: inline-flex;
 }
 
+.hero {
+  height: 60vh;
+}
+
 @media only screen and (max-width: 1024px) {
   .image-data {
     color: #fff;
@@ -43,8 +47,7 @@
     left: 0;
     display: inline-block;
   }
-}
-
-.hero {
-  height: 60vh;
+  .hero {
+    height: 70vh;
+  }
 }
