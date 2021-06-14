@@ -30,7 +30,7 @@ const SearchField = ({ setSearchTerm }) => {
             <FiSearch />
           </button>
         </div>
-        <p className='text-gray-100 text-md font-sans pl-3 mt-2'>
+        <p className='text-gray-100 text-md font-weight-thin font-sans pl-3 mt-2'>
           Sugested: city, work, girl, office, travel
         </p>
       </form>
@@ -39,24 +39,3 @@ const SearchField = ({ setSearchTerm }) => {
 };
 
 export default SearchField;
-
-{
-  /*    <div className='w-full rounded overflow-hidden mt-10 mb-20 mx-auto absolute bottom-0'>
-      <form onSubmit={handleSubmit} className='w-full max-w-xl mx-auto'>
-        <div className='flex items-center border-b-2 border-teal-500 py-2'>
-          <input
-            onChange={handleChange}
-            value={text}
-            type='text'
-            placeholder='Search Images..'
-            className='appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none'
-          />
-          <button
-            type='submit'
-            className='flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded'>
-            Search
-          </button>
-        </div>
-      </form>
-    </div>*/
-}
