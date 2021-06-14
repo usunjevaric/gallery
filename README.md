@@ -12,6 +12,7 @@ In application you can search for specific images with entering therm you intere
   - Axios
   - Pixabay API
 
+<img width="1440" alt="Screenshot 2021-06-14 at 2 35 21 PM" src="https://user-images.githubusercontent.com/44525648/121893177-f69a8700-cd1d-11eb-91f4-0bf556dcfa8c.png">
 
 
 ## Available Scripts
