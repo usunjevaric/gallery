@@ -1,5 +1,19 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## About Project [![Website shields.io](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://gallery-usunjevaric.netlify.app/)
+
+Whit this application I continue to learning modern react concepts like hooks, axios and tailwind. In project was used PixaBay API for fetching stock images and display to app user.
+In application you can search for specific images with entering therm you interest in
+
+## Technologies
+  - React JS
+  - HTML
+  - TailWind
+  - Axios
+  - Pixabay API
+
+
+
 ## Available Scripts
 
 In the project directory, you can run:
